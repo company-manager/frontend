@@ -19,13 +19,9 @@
 			}
 		],
 		"paths": {
-<<<<<<< HEAD
 			"@/*": ["./src/*"],
 			"@components/*": ["./src/components/*"],
 			"@ui/*": ["./src/components/ui/*"]
-=======
-			"@/*": ["./src/*"]
->>>>>>> 196ad79 (docs: edit readme)
 		},
 		"forceConsistentCasingInFileNames": true
 	},
