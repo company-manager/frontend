@@ -14,7 +14,11 @@ Depois de clonar o projeto basta correr `yarn install` e de seguida `yarn dev` p
 -   Redux 🔮
 -   @emotion/styled-components 💅🏼
 
+<<<<<<< HEAD
 ##### CI/CD
+=======
+#### CI/CD
+>>>>>>> 196ad79 (docs: edit readme)
 
 -   Husky 🐶
 -   Eslint 📏
