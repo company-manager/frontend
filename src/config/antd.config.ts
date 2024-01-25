@@ -19,6 +19,7 @@ const antdCustomTheme: ThemeConfig = {
 		screenXL: 1200, // default value
 		screenXXL: 1600, // default value
 		colorPrimaryTextHover: '#00ff00',
+		controlItemBgHover: '#00FF00',
 	},
 }
 
