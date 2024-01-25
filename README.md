@@ -1,5 +1,3 @@
-# 🎨 Frontend
-
 Este projeto é desenvolvido com [Next.js](https://nextjs.org/) e foi usado a partir do boilerplate [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## 🚀 Instalar
