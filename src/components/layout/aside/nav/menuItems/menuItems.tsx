@@ -18,7 +18,7 @@ const items: MenuProps['items'] = [
 
 	getItem('Cliente', 'sub2', <SmileOutlined />),
 
-	getItem('Stock', 'sub4', <ShoppingCartOutlined />),
+	getItem('Stock', 'sub3', <ShoppingCartOutlined />),
 
 	getItem('Colaboradores', 'sub4', <TeamOutlined />),
 ]
