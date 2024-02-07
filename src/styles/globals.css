@@ -4,39 +4,42 @@
 
 @layer base {
 	:root {
-		--background: 0, 100%, 50%;
-		--foreground: yellow;
+		--background: 300, 100%, 100%;
+		--foreground: 175, 13%, 18%;
 
-		--card: red;
-		--card-foreground: yellow;
+		--card: 300, 100%, 100%;
+		--card-foreground: 175, 13%, 18%;
 
-		--popover: red;
-		--popover-foreground: yellow;
+		--popover: 300, 100%, 100%;
+		--popover-foreground: 175, 13%, 18%;
 
-		--primary: 120, 100%, 25%;
-		--primary-foreground: blue;
+		--primary: 318, 100%, 77%;
+		--primary-foreground: 300, 100%, 100%;
 
-		--secondary: purple;
-		--secondary-foreground: green;
+		--secondary: 300, 100%, 100%;
+		--secondary-foreground: 175, 13%, 18%;
 
-		--muted: purple;
-		--muted-foreground: orange;
+		--muted: 300, 100%, 100%;
+		--muted-foreground: 240 3.8% 46.1%;
 
-		--accent: purple;
-		--accent-foreground: green;
+		--accent: 300, 100%, 100%;
+		--accent-foreground: 175, 13%, 18%;
 
-		--destructive: 0 84.2% 60.2%;
-		--destructive-foreground: blue;
+		--destructive: 359, 100%, 70%;
+		--destructive-foreground: 300, 100%, 100%;
 
-		--border: pink;
-		--input: pink;
-		--ring: 240 10% 3.9%;
+		--border: 240, 6%, 90%;
+		--input: 240, 6%, 90%;
+		--ring: 175, 13%, 18%;
 
-		--radius: 0.5rem;
+		--radius: 0.25rem;
+
+		--white: 300, 100%, 100%;
+		--coral: 175, 13%, 18%;
 	}
 
 	.dark {
-		--background: 240 10% 3.9%;
+		--background: 175, 13%, 18%;
 		--foreground: 0 0% 98%;
 
 		--card: 240 10% 3.9%;
@@ -45,7 +48,7 @@
 		--popover: 240 10% 3.9%;
 		--popover-foreground: 0 0% 98%;
 
-		--primary: 0 0% 98%;
+		--primary: 318, 100%, 77%;
 		--primary-foreground: 240 5.9% 10%;
 
 		--secondary: 240 3.7% 15.9%;
@@ -61,16 +64,18 @@
 		--destructive-foreground: 0 0% 98%;
 
 		--border: 240 3.7% 15.9%;
-		--input: 240 3.7% 15.9%;
+
+		--input: 240, 6%, 90%;
 		--ring: 240 4.9% 83.9%;
 	}
-}
 
-@layer base {
 	* {
 		@apply border-border;
+		box-sizing: border-box;
 	}
+
 	body {
 		@apply bg-background text-foreground;
+		font-family: 'Fira Sans';
 	}
 }
