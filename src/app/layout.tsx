@@ -1,4 +1,5 @@
-import { ChildrenTypes } from '@/types/global.types'
+import React from 'react'
+import { ChildrenTypes } from '@types/global.types'
 import { Fira_Sans } from 'next/font/google'
 import '../styles/globals.css'
 
