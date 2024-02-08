@@ -8,10 +8,9 @@ const firaSans = Fira_Sans({
 	style: ['normal', 'italic'],
 	subsets: ['latin'],
 	display: 'swap',
-  })
+})
 
 export default function RootLayout({ children }: ChildrenTypes) {
-	
 	return (
 		<html lang="en">
 			<body className={firaSans.className}>
