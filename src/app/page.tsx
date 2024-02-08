@@ -1,11 +1,12 @@
 import React from 'react'
+import Aside from '@/components/aside/aside'
 
-const HomePage = () => (
-	<div className="App">
+const Home = () => {
+	return (
 		<div>
-			<h1>Company Manager</h1>
+			<Aside />
 		</div>
-	</div>
-)
+	)
+}
 
 export default HomePage
