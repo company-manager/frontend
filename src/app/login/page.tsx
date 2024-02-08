@@ -43,6 +43,9 @@ const Home = () => {
 				<div className="mt-6">
 					<Button type="submit">Submit</Button>
 				</div>
+				<div className="mt-6">
+					<Button type="submit">Submit</Button>
+				</div>
 			</form>
 		</div>
 	)
