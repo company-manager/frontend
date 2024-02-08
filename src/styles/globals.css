@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		--background: 300, 100%, 100%;
+		--foreground: 175, 13%, 18%;
+
+		--card: 300, 100%, 100%;
+		--card-foreground: 175, 13%, 18%;
+
+		--popover: 300, 100%, 100%;
+		--popover-foreground: 175, 13%, 18%;
+
+		--primary: 318, 100%, 77%;
+		--primary-foreground: 300, 100%, 100%;
+
+		--secondary: 300, 100%, 100%;
+		--secondary-foreground: 175, 13%, 18%;
+
+		--muted: 300, 100%, 100%;
+		--muted-foreground: 240 3.8% 46.1%;
+
+		--accent: 300, 100%, 100%;
+		--accent-foreground: 175, 13%, 18%;
+
+		--destructive: 359, 100%, 70%;
+		--destructive-foreground: 300, 100%, 100%;
+
+		--border: 240, 6%, 90%;
+		--input: 240, 6%, 90%;
+		--ring: 175, 13%, 18%;
+
+		--radius: 0.25rem;
+
+		--white: 300, 100%, 100%;
+		--coral: 175, 13%, 18%;
+	}
+
+	.dark {
+		--background: 175, 13%, 18%;
+		--foreground: 0 0% 98%;
+
+		--card: 240 10% 3.9%;
+		--card-foreground: 0 0% 98%;
+
+		--popover: 240 10% 3.9%;
+		--popover-foreground: 0 0% 98%;
+
+		--primary: 318, 100%, 77%;
+		--primary-foreground: 240 5.9% 10%;
+
+		--secondary: 240 3.7% 15.9%;
+		--secondary-foreground: 0 0% 98%;
+
+		--muted: 240 3.7% 15.9%;
+		--muted-foreground: 240 5% 64.9%;
+
+		--accent: 240 3.7% 15.9%;
+		--accent-foreground: 0 0% 98%;
+
+		--destructive: 0 62.8% 30.6%;
+		--destructive-foreground: 0 0% 98%;
+
+		--border: 240 3.7% 15.9%;
+
+		--input: 240, 6%, 90%;
+		--ring: 240 4.9% 83.9%;
+	}
+
+	* {
+		@apply border-border;
+		box-sizing: border-box;
+	}
+
+	body {
+		@apply bg-background text-foreground;
+		font-family: 'Fira Sans';
+	}
+}

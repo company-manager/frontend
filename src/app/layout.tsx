@@ -1,27 +1,21 @@
 import React from 'react'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.scss'
-import { ConfigProvider } from 'antd'
+import { ChildrenTypes } from '@global-types/global.types'
+import { Fira_Sans } from 'next/font/google'
+import '../styles/globals.css'
 
-import StyledComponentsRegistry from '@/lib/AntdRegistry'
-import theme from '@/theme/themeConfig'
+const firaSans = Fira_Sans({
+	weight: ['400', '600'],
+	style: ['normal', 'italic'],
+	subsets: ['latin'],
+	display: 'swap',
+})
 
-const inter = Inter({ subsets: ['latin'] })
-
-export const metadata: Metadata = {
-	title: 'Company Manager',
-	description: 'Company Manager dashboard',
-}
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: ChildrenTypes) {
 	return (
-		<ConfigProvider theme={theme}>
-			<html lang="en">
-				<body className={inter.className}>
-					<StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-				</body>
-			</html>
-		</ConfigProvider>
+		<html lang="en">
+			<body className={firaSans.className}>
+				<main>{children}</main>
+			</body>
+		</html>
 	)
 }
