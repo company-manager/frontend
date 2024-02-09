@@ -1,28 +1,16 @@
 'use client'
-import React from 'react'
-import { Input } from '@components/ui/input'
-import { Label } from '@components/ui/label'
-import { Button } from '@components/ui/button'
+import React, { useContext } from 'react'
+import { Input } from '@ui/input'
+import { Label } from '@ui/label'
+import { Button } from '@ui/button'
+import { AuthContext } from '@context/auth/AuthContext'
 
 const Home = () => {
+	const { authenticate } = useContext(AuthContext)
+
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault()
-
-		const result = await fetch('http://localhost:3003/api/v1/auth/login', {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				user: {
-					email: 'nuno@email.com',
-					password: '12345',
-				},
-			}),
-		})
-			.then((data) => data.json())
-			.then((data) => console.log(data))
+		authenticate({ email: 'nuno@email.com', password: '12345' })
 	}
 
 	return (

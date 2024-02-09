@@ -2,6 +2,7 @@ import React from 'react'
 import { ChildrenTypes } from '@global-types/global.types'
 import { Fira_Sans } from 'next/font/google'
 import '../styles/globals.scss'
+import AuthContextProvider from '@context/auth/AuthContext'
 
 const firaSans = Fira_Sans({
 	weight: ['400', '600'],
@@ -12,10 +13,12 @@ const firaSans = Fira_Sans({
 
 export default function RootLayout({ children }: ChildrenTypes) {
 	return (
-		<html lang="en">
-			<body className={firaSans.className}>
-				<main>{children}</main>
-			</body>
-		</html>
+		<AuthContextProvider>
+			<html lang="en">
+				<body className={firaSans.className}>
+					<main>{children}</main>
+				</body>
+			</html>
+		</AuthContextProvider>
 	)
 }
