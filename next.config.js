@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	compiler: {
-		swcMinify: true,
-	},
+	basePath: '/app',
 }
 
 module.exports = nextConfig

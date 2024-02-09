@@ -1,13 +1,11 @@
-'use client'
 import React from 'react'
-import Aside from '@/components/aside/aside'
 
-const Home = () => {
-	return (
+const HomePage = () => (
+	<div className="App">
 		<div>
-			<Aside />
+			<h1>Company Manager</h1>
 		</div>
-	)
-}
+	</div>
+)
 
-export default Home
+export default HomePage
