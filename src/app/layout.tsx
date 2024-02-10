@@ -3,6 +3,7 @@ import { ChildrenTypes } from '@global-types/global.types'
 import { Fira_Sans } from 'next/font/google'
 import '../styles/globals.scss'
 import AuthContextProvider from '@context/auth/AuthContext'
+import Link from 'next/link'
 
 const firaSans = Fira_Sans({
 	weight: ['400', '600'],
@@ -16,6 +17,10 @@ export default function RootLayout({ children }: ChildrenTypes) {
 		<AuthContextProvider>
 			<html lang="en">
 				<body className={firaSans.className}>
+					<nav className="flex gap-4 p-6 text-xl">
+						<Link href={'/login'}>Login</Link>
+						<Link href={'/about'}>About</Link>
+					</nav>
 					<main>{children}</main>
 				</body>
 			</html>
