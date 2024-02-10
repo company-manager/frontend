@@ -1,16 +1,27 @@
 'use client'
 import React, { useContext } from 'react'
+
+import { AuthContext } from '@context/auth/AuthContext'
+import useRedirect from '@hooks/useRedirect'
 import { Input } from '@ui/input'
 import { Label } from '@ui/label'
 import { Button } from '@ui/button'
-import { AuthContext } from '@context/auth/AuthContext'
 
 const Home = () => {
 	const { authenticate } = useContext(AuthContext)
+	const { redirect } = useRedirect()
 
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault()
-		authenticate({ email: 'nuno@email.com', password: '12345' })
+		try {
+			await authenticate({
+				email: 'nuno@email.com',
+				password: '12345',
+			})
+		} catch (error) {
+			redirect('/login')
+		}
+		redirect('/about')
 	}
 
 	return (
