@@ -52,6 +52,15 @@ const AuthContextProvider = ({ children }: ChildrenTypes) => {
 		}
 	}
 
+	const refresh = async () => {
+		try {
+			const data = await fetch(`${origin}/api/v1/auth/login`)
+			const { accessToken } = await data.json()
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
 	useEffect(() => {
 		console.log(user)
 	}, [user])
