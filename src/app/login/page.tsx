@@ -1,6 +1,5 @@
 'use client'
 import React, { useContext } from 'react'
-
 import { AuthContext } from '@context/auth/AuthContext'
 import useRedirect from '@hooks/useRedirect'
 import { Input } from '@ui/input'
@@ -18,10 +17,11 @@ const Home = () => {
 				email: 'nuno@email.com',
 				password: '12345',
 			})
+
+			redirect('/dashboard')
 		} catch (error) {
-			redirect('/login')
+			console.log(error)
 		}
-		redirect('/about')
 	}
 
 	return (
