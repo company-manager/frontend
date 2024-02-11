@@ -19,7 +19,8 @@ export default function RootLayout({ children }: ChildrenTypes) {
 				<body className={firaSans.className}>
 					<nav className="flex gap-4 p-6 text-xl">
 						<Link href={'/login'}>Login</Link>
-						<Link href={'/about'}>About</Link>
+						<Link href={'/dashboard'}>Dashboard</Link>
+						<Link href={'/profile'}>Profile</Link>
 					</nav>
 					<main>{children}</main>
 				</body>

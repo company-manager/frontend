@@ -5,12 +5,14 @@ import { UseAuthType } from './types'
 const useAuth = (): UseAuthType => {
 	const { isAuthenticated, authenticate, user } = useContext(AuthContext)
 
+	const getAccessToken = () => user?.accessToken
 	const getUser = () => user
 
 	return {
 		isAuthenticated,
 		authenticate,
 		getUser,
+		getAccessToken,
 	}
 }
 

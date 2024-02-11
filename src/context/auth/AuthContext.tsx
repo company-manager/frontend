@@ -1,6 +1,5 @@
 'use client'
-import { createContext, useState, useEffect, useContext } from 'react'
-import { setCookie, parseCookies } from 'nookies'
+import { createContext, useState, useEffect } from 'react'
 import { ChildrenTypes } from '@global-types/global.types'
 import {
 	AuthContextType,
@@ -16,8 +15,6 @@ const AuthContextProvider = ({ children }: ChildrenTypes) => {
 	const [user, setUser] = useState<UserType | null>(null)
 	const origin = process.env.API_ORIGIN || 'http://localhost:3003'
 	const isAuthenticated = !!user
-	const DAYS = 5
-	const COOKIE_AGE = 60 * 60 * 24 * DAYS
 
 	const authenticate = async ({ email, password }: LoginDataType) => {
 		try {
@@ -36,11 +33,10 @@ const AuthContextProvider = ({ children }: ChildrenTypes) => {
 			})
 			if (data.ok) {
 				const { user, tokens }: ResponseDataType = await data.json()
-				const { accessToken, refreshToken } = tokens
+				const { accessToken } = tokens
 				const userData = { ...user, accessToken }
 
 				setUser(userData)
-				setCookie({}, 'r_token', refreshToken, { maxAge: COOKIE_AGE })
 			}
 
 			if (!data.ok) {
@@ -54,15 +50,17 @@ const AuthContextProvider = ({ children }: ChildrenTypes) => {
 
 	const refresh = async () => {
 		try {
-			const data = await fetch(`${origin}/api/v1/auth/login`)
+			const data = await fetch(`${origin}/api/v1/auth/refresh`)
 			const { accessToken } = await data.json()
+
+			console.log('a_token_', accessToken)
 		} catch (error) {
 			console.log(error)
 		}
 	}
 
 	useEffect(() => {
-		console.log(user)
+		// console.log(user)
 	}, [user])
 
 	return (
