@@ -7,15 +7,14 @@ type AuthContextType = {
 	isAuthenticated: boolean
 	user: UserType | null
 	authenticate: (data: LoginDataType) => Promise<void>
+	refresh: any
 }
 
 type UserType = {
 	id: string
 	first_name: string
-	last_name: string
 	email: string
-	role_id?: number
-	accessToken?: string
+	accessToken: string
 }
 
 type JWTResponseType = {
