@@ -1,33 +1,39 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import useAuth from '@hooks/useAuth'
 import isAuth from '@hoc/isAuth'
+import useRefreshToken from '@hooks/useRefreshToken'
+import useAxios from '@hooks/useAxios'
 
 const Dashboard = () => {
 	const [users, setUsers] = useState<any>([])
-	const { isAuthenticated, getAccessToken } = useAuth()
-	const accessToken = getAccessToken()
+	const { isAuthenticated, accessToken } = useAuth()
+	const { refresh } = useRefreshToken()
+	const axios = useAxios()
 
-	const getUsers = async () => {
-		const response = await fetch('http://localhost:3003/api/v1/users', {
-			headers: {
-				Authorization: `Bearer ${accessToken}`,
-			},
-		})
-		if (!response.ok) {
-			// TRY REFRESH TOKEN ?
-		}
+	const getUsers = useCallback(async () => {
+		try {
+			const response = await axios.get('users', {
+				headers: {
+					Authorization: `Bearer ${accessToken}`,
+				},
+			})
 
-		if (response.ok) {
-			const data = await response.json()
-			const results = await data.results
-			setUsers(results)
+			if (response.data) {
+				const {
+					data: { results },
+				} = response
+
+				setUsers(results)
+			}
+		} catch (error) {
+			console.log(error)
 		}
-	}
+	}, [accessToken, axios])
 
 	useEffect(() => {
 		getUsers()
-	}, [])
+	}, [isAuthenticated, getUsers])
 
 	return (
 		<div className="p-8">

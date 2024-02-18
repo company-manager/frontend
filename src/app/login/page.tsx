@@ -1,27 +1,20 @@
 'use client'
-import React, { useContext } from 'react'
-import { AuthContext } from '@context/auth/AuthContext'
-import useRedirect from '@hooks/useRedirect'
+import React, { useEffect } from 'react'
 import { Input } from '@ui/input'
 import { Label } from '@ui/label'
 import { Button } from '@ui/button'
+import useLogin from '@hooks/useLogin'
 
 const Home = () => {
-	const { authenticate } = useContext(AuthContext)
-	const { redirect } = useRedirect()
+	const { login, error } = useLogin()
 
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault()
-		try {
-			await authenticate({
-				email: 'nuno@email.com',
-				password: '12345',
-			})
 
-			redirect('/dashboard')
-		} catch (error) {
-			console.log(error)
-		}
+		await login({
+			email: 'nuno@email.com',
+			password: '12345',
+		})
 	}
 
 	return (
@@ -32,10 +25,20 @@ const Home = () => {
 				<div>
 					<Label htmlFor="email">Email</Label>
 					<Input id="email" />
+					{error?.tip?.includes('Email') && (
+						<span className="text-xs text-red-400">
+							Email not valid
+						</span>
+					)}
 				</div>
 				<div className="mt-6">
 					<Label htmlFor="password">Password</Label>
 					<Input id="password" />
+					{error?.tip?.includes('Password') && (
+						<span className="text-xs text-red-400">
+							Password incorrect
+						</span>
+					)}
 				</div>
 				<div className="mt-6">
 					<Button type="submit">Submit</Button>

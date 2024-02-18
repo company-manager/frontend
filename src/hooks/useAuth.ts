@@ -3,17 +3,9 @@ import { AuthContext } from '@context/auth/AuthContext'
 import { UseAuthType } from './types'
 
 const useAuth = (): UseAuthType => {
-	const { isAuthenticated, authenticate, user } = useContext(AuthContext)
+	const { isAuthenticated, accessToken } = useContext(AuthContext)
 
-	const getAccessToken = () => user?.accessToken
-	const getUser = () => user
-
-	return {
-		isAuthenticated,
-		authenticate,
-		getUser,
-		getAccessToken,
-	}
+	return { isAuthenticated, accessToken }
 }
 
 export default useAuth
