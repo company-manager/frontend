@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { Fira_Sans } from 'next/font/google'
-import '../styles/globals.css'
+import '../styles/globals.scss'
 import { ChildrenTypes } from '@global-types/global.types'
 import AuthContextProvider from '@context/auth/AuthContext'
 
