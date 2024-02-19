@@ -1,9 +1,9 @@
 import React from 'react'
-import { ChildrenTypes } from '@global-types/global.types'
+import Link from 'next/link'
 import { Fira_Sans } from 'next/font/google'
 import '../styles/globals.css'
+import { ChildrenTypes } from '@global-types/global.types'
 import AuthContextProvider from '@context/auth/AuthContext'
-import Link from 'next/link'
 
 const firaSans = Fira_Sans({
 	weight: ['400', '600'],

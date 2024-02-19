@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import { AuthContext } from '@context/auth/AuthContext'
 import { LoginDataType } from '@context/auth/types'
 import useRedirect from '@hooks/useRedirect'
-import axios from '@lib/axios'
+import { axiosPrivate } from '@lib/axios'
 import { isAxiosError } from 'axios'
 
 const useLogin = () => {
@@ -16,7 +16,7 @@ const useLogin = () => {
 
 	const login = async ({ email, password }: LoginDataType) => {
 		try {
-			const response = await axios.post('auth/login', {
+			const response = await axiosPrivate.post('auth/login', {
 				user: {
 					email,
 					password,
@@ -25,8 +25,11 @@ const useLogin = () => {
 
 			if (response.data) {
 				setError(null)
-				const { accessToken } = response.data.tokens
-				// TODO: set user id
+				const { user, tokens } = response.data
+				const { accessToken } = tokens
+				const { id } = user
+
+				//TODO setUser(id)
 
 				setAccessToken(accessToken)
 				redirect('/dashboard')
