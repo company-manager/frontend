@@ -1,13 +1,17 @@
 import { useContext } from 'react'
 import { AuthContext } from '@context/auth/AuthContext'
-import { axiosPrivate } from '@lib/axios'
+import axios from '@lib/axios'
+import useRedirect from './useRedirect'
 
 const useRefreshToken = () => {
 	const { setAccessToken } = useContext(AuthContext)
+	const { redirect } = useRedirect()
 
 	const refresh = async () => {
 		try {
-			const response = await axiosPrivate.get(`auth/refresh`)
+			const response = await axios.get(`auth/refresh`, {
+				withCredentials: true,
+			})
 
 			if (response.data) {
 				const { accessToken } = response.data.tokens
@@ -16,7 +20,7 @@ const useRefreshToken = () => {
 				return accessToken
 			}
 		} catch (error) {
-			console.error(error)
+			redirect('/login')
 		}
 	}
 
