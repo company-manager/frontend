@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Input } from '@ui/input'
 import { Label } from '@ui/label'
 import { Button } from '@ui/button'
@@ -39,9 +39,6 @@ const Home = () => {
 							Password incorrect
 						</span>
 					)}
-				</div>
-				<div className="mt-6">
-					<Button type="submit">Submit</Button>
 				</div>
 				<div className="mt-6">
 					<Button type="submit">Submit</Button>

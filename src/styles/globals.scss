@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './utils';
+
 @layer base {
 	:root {
 		--background: 300, 100%, 100%;
