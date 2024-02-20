@@ -2,21 +2,14 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import useAuth from '@hooks/useAuth'
 import isAuth from '@hoc/isAuth'
-import useRefreshToken from '@hooks/useRefreshToken'
 import useAxios from '@hooks/useAxios'
 import { AuthContext } from '@context/auth/AuthContext'
-// import { axiosPrivate } from '@lib/axios'
 
 const Dashboard = () => {
 	const { accessToken } = useContext(AuthContext)
 	const [users, setUsers] = useState<any>([])
 	const { isAuthenticated } = useAuth()
-	const { refresh } = useRefreshToken()
 	const axios = useAxios()
-
-	useEffect(() => {
-		console.log('dashboard', accessToken)
-	}, [accessToken])
 
 	const getUsers = useCallback(async () => {
 		try {
@@ -54,7 +47,6 @@ const Dashboard = () => {
 							<li key={user?.id}>{user?.first_name}</li>
 						))}
 					</ul>
-					<button onClick={refresh}>Refresh</button>
 				</div>
 			) : (
 				<h1>You have no permission to se this page</h1>
