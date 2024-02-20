@@ -4,20 +4,33 @@ import useAuth from '@hooks/useAuth'
 import isAuth from '@hoc/isAuth'
 import useAxios from '@hooks/useAxios'
 import { AuthContext } from '@context/auth/AuthContext'
+import { ApiResponse } from '@global-types/global.types'
+
+type UserDataType = {
+	id: string
+	first_name: string
+	last_name: string
+	email: string
+	user_password: string
+	role_id: number
+}
 
 const Dashboard = () => {
 	const { accessToken } = useContext(AuthContext)
-	const [users, setUsers] = useState<any>([])
+	const [users, setUsers] = useState<UserDataType[]>([])
 	const { isAuthenticated } = useAuth()
 	const axios = useAxios()
 
 	const getUsers = useCallback(async () => {
 		try {
-			const response = await axios.get('users', {
-				headers: {
-					Authorization: `Bearer ${accessToken}`,
-				},
-			})
+			const response = await axios.get<ApiResponse<UserDataType[]>>(
+				'users',
+				{
+					headers: {
+						Authorization: `Bearer ${accessToken}`,
+					},
+				}
+			)
 
 			if (response.data) {
 				const {
@@ -29,7 +42,7 @@ const Dashboard = () => {
 		} catch (error) {
 			// console.log(error)
 		}
-	}, [accessToken, axios])
+	}, [axios, accessToken])
 
 	useEffect(() => {
 		!users.length && getUsers()
