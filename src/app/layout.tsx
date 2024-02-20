@@ -1,9 +1,11 @@
+'use client'
 import React from 'react'
 import Link from 'next/link'
 import { Fira_Sans } from 'next/font/google'
 import '../styles/globals.scss'
 import { ChildrenTypes } from '@global-types/global.types'
 import AuthContextProvider from '@context/auth/AuthContext'
+import { Button } from '@components/ui/button'
 
 const firaSans = Fira_Sans({
 	weight: ['400', '600'],
