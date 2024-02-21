@@ -4,6 +4,7 @@ import { Fira_Sans } from 'next/font/google'
 import '../styles/globals.scss'
 import { ChildrenType } from '@global-types/global.types'
 import AuthContextProvider from '@context/auth/AuthContext'
+import Link from 'next/link'
 
 const firaSans = Fira_Sans({
 	weight: ['400', '600'],

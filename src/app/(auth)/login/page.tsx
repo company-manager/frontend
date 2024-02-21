@@ -13,7 +13,7 @@ type LoginDataType = {
 	password: string
 }
 
-const Home = () => {
+const Login = () => {
 	const { login, error } = useAuth()
 	const {
 		register,
@@ -30,7 +30,9 @@ const Home = () => {
 		<div className="c_border flex-grow !py-16">
 			<div className="flex gap-16 flex-col items-center mx-auto max-w-88">
 				<div className="flex flex-col gap-4 items-center">
-					<Heading>Login</Heading>
+					<Heading variant="secondary" size="xl">
+						Login
+					</Heading>
 					<Text isCenter={true} variant="secondary" size="xs">
 						Insere os dados de acesso para fazer login na tua conta
 						para acederes ao dashboard.
@@ -64,6 +66,9 @@ const Home = () => {
 						{errors?.password?.type === 'required' && (
 							<p>Password is required</p>
 						)}
+						{error?.tip.includes('assword is incorrect') && (
+							<p>Password is incorrect</p>
+						)}
 					</div>
 					<div className="mt-6">
 						<Button type="submit">Submit</Button>
@@ -74,4 +79,4 @@ const Home = () => {
 	)
 }
 
-export default Home
+export default Login

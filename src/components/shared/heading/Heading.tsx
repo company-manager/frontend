@@ -43,6 +43,4 @@ const Heading = ({
 	)
 }
 
-// Title.displayName = 'Title'
-
 export default Heading

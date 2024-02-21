@@ -40,9 +40,6 @@ const config = {
 				1680: '1680px',
 				'fix-hover': { raw: '(hover: hover) and (pointer: fine)' },
 			},
-			textColor: {
-				primary: 'hsl(var(--primary))',
-			},
 			colors: {
 				white: 'hsl(300, 100%, 100%)',
 				coral: 'hsl(175, 13%, 18%)',

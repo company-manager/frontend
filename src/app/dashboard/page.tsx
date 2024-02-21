@@ -16,21 +16,14 @@ type UserDataType = {
 }
 
 const Dashboard = () => {
-	const { accessToken } = useContext(AuthContext)
 	const [users, setUsers] = useState<UserDataType[]>([])
-	const { isAuthenticated } = useAuth()
+	const { isAuthenticated, accessToken } = useAuth()
 	const axios = useAxios()
 
 	const getUsers = useCallback(async () => {
 		try {
-			const response = await axios.get<ApiResponse<UserDataType[]>>(
-				'users',
-				{
-					headers: {
-						Authorization: `Bearer ${accessToken}`,
-					},
-				}
-			)
+			const response =
+				await axios.get<ApiResponse<UserDataType[]>>('users')
 
 			if (response.data) {
 				const {

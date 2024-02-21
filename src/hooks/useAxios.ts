@@ -7,7 +7,6 @@ import useRedirect from '@hooks/useRedirect'
 const useAxios = () => {
 	const { accessToken } = useAuth()
 	const { refresh } = useRefreshToken()
-	const { redirect } = useRedirect()
 
 	useEffect(() => {
 		const requestInterceptor = axiosPrivate.interceptors.request.use(
