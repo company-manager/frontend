@@ -14,7 +14,7 @@ export default function isAuth(Component: any) {
 		}, [])
 
 		if (!isAuthenticated) {
-			return null
+			return redirect('/login')
 		}
 
 		return <Component {...props} />
