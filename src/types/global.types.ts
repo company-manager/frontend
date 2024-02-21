@@ -1,6 +1,6 @@
 import React from 'react'
 
-export type ChildrenTypes = { children: React.ReactNode }
+export type ChildrenType = React.ReactNode
 
 export type ApiStatusResponse = {
 	code: number

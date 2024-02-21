@@ -78,4 +78,16 @@
 body {
 	@apply bg-background text-foreground;
 	font-family: 'Fira Sans';
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+	color: var(--coral);
+
+	@media (prefers-color-scheme: dark) {
+		color: var(--white);
+	}
+}
+
+.c_border {
+	@apply border border-coral dark:border-white rounded p-4;
 }

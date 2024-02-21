@@ -1,6 +1,10 @@
-import { ChildrenTypes } from '@/types/global.types'
+import { ChildrenType } from '@global-types/global.types'
 
-const Container = ({ children }: ChildrenTypes) => {
+type PropsTypes = {
+	children: ChildrenType
+}
+
+const Container = ({ children }: PropsTypes) => {
 	return <div className="m-4 h-full w-full">{children}</div>
 }
 export default Container
