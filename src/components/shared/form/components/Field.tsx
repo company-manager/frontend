@@ -16,17 +16,15 @@ const Field = ({
 		switch (type) {
 			case FieldEnum.INPUT:
 				return (
-					<>
-						<Input
-							id={name}
-							placeholder={placeholder}
-							type={inputType}
-							{...register(name, {
-								required,
-								pattern: new RegExp(pattern || ''),
-							})}
-						/>
-					</>
+					<Input
+						id={name}
+						placeholder={placeholder}
+						type={inputType}
+						{...register(name, {
+							required,
+							pattern: new RegExp(pattern || ''),
+						})}
+					/>
 				)
 			case FieldEnum.CHECKBOX:
 				return 'CHECKBOX'
