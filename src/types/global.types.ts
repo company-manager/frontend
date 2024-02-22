@@ -14,16 +14,6 @@ export type ApiResponse<T> = {
 	results: T
 }
 
-type SchemaFieldErrorType = {
-	invalid?: string
-	required?: string
-	incorrect?: string
-}
-
-export type SchemaFieldsType = {
-	type: string
-	name: string
-	placeholder?: string
-	pattern?: RegExp
-	error?: SchemaFieldErrorType
+export interface WithKeyProps {
+	key: React.Key
 }
