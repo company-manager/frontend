@@ -12,21 +12,39 @@ const config = {
 				'2xl': '1400px',
 			},
 		},
+		fontSize: {
+			xxs: '0.75rem', // 12px
+			xs: '0.875rem', // 14px
+			base: '1rem', // 16px
+			sm: '1.5rem', // 24px
+			md: '2rem', // 32px
+			lg: '3rem', // 48px
+			xl: '4rem', // 64px
+		},
+		screens: {
+			414: '414px',
+			640: '640px',
+			768: '768px',
+			991: '991px',
+			1024: '1024px',
+			1140: '1140px',
+			1280: '1280px',
+			1440: '1440px',
+			1680: '1680px',
+			_hover: { raw: '(hover: hover)' },
+		},
 		extend: {
-			screens: {
-				414: '414px',
-				640: '640px',
-				768: '768px',
-				991: '991px',
-				1024: '1024px',
-				1140: '1140px',
-				1280: '1280px',
-				1440: '1440px',
-				1680: '1680px',
-				'fix-hover': { raw: '(hover: hover) and (pointer: fine)' },
+			spacing: {
+				88: '22rem', // 352px
 			},
-
+			lineHeight: {
+				'very-tight': '1.25em',
+			},
 			colors: {
+				white: 'hsl(300, 100%, 100%)',
+				coral: 'hsl(175, 13%, 18%)',
+				'dark-grey': 'hsl(240, 4%, 46%)',
+				'light-grey': 'hsl(240, 6%, 90%)',
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
