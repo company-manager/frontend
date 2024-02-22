@@ -13,3 +13,17 @@ export type ApiResponse<T> = {
 	message: string
 	results: T
 }
+
+type SchemaFieldErrorType = {
+	invalid?: string
+	required?: string
+	incorrect?: string
+}
+
+export type SchemaFieldsType = {
+	type: string
+	name: string
+	placeholder?: string
+	pattern?: RegExp
+	error?: SchemaFieldErrorType
+}
