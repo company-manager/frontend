@@ -6,6 +6,8 @@ type SchemaFieldErrorType = {
 	incorrect?: string
 }
 
+type InputTypesEnum = 'text' | 'password' | 'number' | 'file'
+
 export enum FieldEnum {
 	INPUT = 'input',
 	SELECT = 'select',
@@ -21,8 +23,9 @@ export interface SchemaFieldsType {
 	error?: SchemaFieldErrorType | undefined
 	label?: string | undefined
 	name: string
-	pattern?: RegExp | undefined
+	pattern?: string | undefined
 	placeholder?: string | undefined
 	required: boolean
 	type: FieldEnum
+	inputType?: InputTypesEnum | undefined
 }

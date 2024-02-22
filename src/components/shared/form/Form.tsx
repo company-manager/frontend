@@ -1,40 +1,27 @@
 'use client'
-import { useForm, Form, SubmitHandler } from 'react-hook-form'
-import { Input } from '@ui/input'
-import { Label } from '@ui/label'
+
 import { Button } from '@ui/button'
-import useAuth from '@hooks/useAuth'
 import { SchemaFieldsType } from '@global-types/form/form.types'
 import Field from './components/Field'
 import ErrorMessage from './components/ErrorMessage'
 
-type PropsType = {
+type PropsType<T> = {
 	schema: SchemaFieldsType[]
 	formName: string
+	onSubmit: () => void
+	register: () => void
+	errors: any
 }
 
-type LoginDataType = {
-	email: string
-	password: string
-}
-
-const GenericForm = ({ schema, formName }: PropsType) => {
-	const { login } = useAuth()
-	const {
-		handleSubmit,
-		register,
-		formState: { errors },
-	} = useForm<LoginDataType>()
-
-	const onSubmit: SubmitHandler<LoginDataType> = async (data) => {
-		const { email, password } = data
-		await login({ email, password })
-	}
-
-	// console.log(errors)
-
+const GenericForm = ({
+	schema,
+	formName,
+	onSubmit,
+	register,
+	errors,
+}: PropsType<T>) => {
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className="w-full">
+		<form onSubmit={onSubmit} className="w-full">
 			<div className="flex flex-col gap-4">
 				{schema.map((field) => {
 					const {
@@ -45,6 +32,7 @@ const GenericForm = ({ schema, formName }: PropsType) => {
 						placeholder,
 						pattern,
 						label,
+						inputType,
 					} = field
 
 					return (
@@ -60,18 +48,26 @@ const GenericForm = ({ schema, formName }: PropsType) => {
 								type={type}
 								pattern={pattern}
 								label={label}
-								error={error}
+								inputType={inputType}
 							/>
 							{Object.keys(errors).length > 0 &&
-								errors[name]?.type === 'required' && (
+								errors[name as keyof typeof errors]?.type ===
+									'required' && (
 									<ErrorMessage>
-										Este campo é obrigatório
+										{error?.required}
+									</ErrorMessage>
+								)}
+							{Object.keys(errors).length > 0 &&
+								errors[name as keyof typeof errors]?.type ===
+									'pattern' && (
+									<ErrorMessage>
+										{error?.invalid}
 									</ErrorMessage>
 								)}
 						</div>
 					)
 				})}
-				<Button type="submit">Submit</Button>
+				<Button type="submit">Entrar</Button>
 			</div>
 		</form>
 	)

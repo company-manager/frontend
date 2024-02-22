@@ -10,6 +10,7 @@ const Field = ({
 	label,
 	required = true,
 	pattern,
+	inputType = 'text',
 }: FieldPropsTypes) => {
 	const renderField = () => {
 		switch (type) {
@@ -19,9 +20,10 @@ const Field = ({
 						<Input
 							id={name}
 							placeholder={placeholder}
+							type={inputType}
 							{...register(name, {
 								required,
-								pattern,
+								pattern: new RegExp(pattern || ''),
 							})}
 						/>
 					</>
