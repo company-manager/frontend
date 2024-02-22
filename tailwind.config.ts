@@ -21,24 +21,24 @@ const config = {
 			lg: '3rem', // 48px
 			xl: '4rem', // 64px
 		},
+		screens: {
+			414: '414px',
+			640: '640px',
+			768: '768px',
+			991: '991px',
+			1024: '1024px',
+			1140: '1140px',
+			1280: '1280px',
+			1440: '1440px',
+			1680: '1680px',
+			_hover: { raw: '(hover: hover)' },
+		},
 		extend: {
 			spacing: {
 				88: '22rem', // 352px
 			},
 			lineHeight: {
 				'very-tight': '1.25em',
-			},
-			screens: {
-				414: '414px',
-				640: '640px',
-				768: '768px',
-				991: '991px',
-				1024: '1024px',
-				1140: '1140px',
-				1280: '1280px',
-				1440: '1440px',
-				1680: '1680px',
-				'fix-hover': { raw: '(hover: hover) and (pointer: fine)' },
 			},
 			colors: {
 				white: 'hsl(300, 100%, 100%)',
