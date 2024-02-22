@@ -1,60 +1,45 @@
 import { Input } from '@components/ui/input'
 import { Label } from '@components/ui/label'
-import { useFormContext } from 'react-hook-form'
-
-enum FieldTypes {
-	INPUT = 'input',
-	SELECT = 'select',
-	RADIO = 'radio',
-	CHECKBOX = 'checkbox',
-}
-
-type PropsTypes = {
-	name: string
-	variant: FieldTypes
-	placeholder: string
-	hasLabel: boolean
-	isRequired: boolean
-	regEx?: RegExp
-}
+import { FieldPropsTypes, FieldEnum } from '@global-types/form/form.types'
 
 const Field = ({
-	variant,
+	type,
 	name,
+	register,
 	placeholder,
-	hasLabel = true,
-	isRequired = true,
-	regEx,
-}: PropsTypes) => {
-	const { register } = useFormContext()
-
+	label,
+	required = true,
+	pattern,
+}: FieldPropsTypes) => {
 	const renderField = () => {
-		switch (variant) {
-			case FieldTypes.INPUT:
+		switch (type) {
+			case FieldEnum.INPUT:
 				return (
-					<Input
-						id={name}
-						placeholder={placeholder}
-						{...register(name, {
-							required: isRequired,
-							pattern: regEx,
-						})}
-					/>
+					<>
+						<Input
+							id={name}
+							placeholder={placeholder}
+							{...register(name, {
+								required,
+								pattern,
+							})}
+						/>
+					</>
 				)
-			case FieldTypes.CHECKBOX:
+			case FieldEnum.CHECKBOX:
 				return 'CHECKBOX'
-			case FieldTypes.RADIO:
+			case FieldEnum.RADIO:
 				return 'RADIO'
-			case FieldTypes.SELECT:
+			case FieldEnum.SELECT:
 				return 'SELECT'
 		}
 	}
 
 	return (
-		<>
-			{hasLabel && <Label htmlFor="email">Email</Label>}
+		<div>
+			{label && <Label htmlFor={name}>{label}</Label>}
 			{renderField()}
-		</>
+		</div>
 	)
 }
 

@@ -1,20 +1,28 @@
 'use client'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm, Form, SubmitHandler } from 'react-hook-form'
 import { Input } from '@ui/input'
 import { Label } from '@ui/label'
 import { Button } from '@ui/button'
 import useAuth from '@hooks/useAuth'
-import { LoginDataType } from '@context/auth/types'
-import { SchemaFieldsType } from '@types/global.types'
+import { SchemaFieldsType } from '@global-types/form/form.types'
+import Field from './components/Field'
+import ErrorMessage from './components/ErrorMessage'
 
 type PropsType = {
 	schema: SchemaFieldsType[]
+	formName: string
 }
 
-const Form = ({ schema }: PropsType) => {
-	const { login, error } = useAuth()
+type LoginDataType = {
+	email: string
+	password: string
+}
+
+const GenericForm = ({ schema, formName }: PropsType) => {
+	const { login } = useAuth()
 	const {
 		handleSubmit,
+		register,
 		formState: { errors },
 	} = useForm<LoginDataType>()
 
@@ -23,39 +31,50 @@ const Form = ({ schema }: PropsType) => {
 		await login({ email, password })
 	}
 
+	console.log(errors)
+
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="w-full">
-			<div>
-				<Label htmlFor="email">Email</Label>
-				<Input
-					id="email"
-					{...register('email', {
-						required: true,
-						pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
-					})}
-				/>
-				{errors?.email?.type === 'pattern' && <p>Email not valid</p>}
-				{errors?.email?.type === 'required' && <p>Email is required</p>}
-			</div>
-			<div>
-				<Label htmlFor="password">Password</Label>
-				<Input
-					type="password"
-					id="password"
-					{...register('password', { required: true })}
-				/>
-				{errors?.password?.type === 'required' && (
-					<p>Password is required</p>
-				)}
-				{error?.tip.includes('assword is incorrect') && (
-					<p>Password is incorrect</p>
-				)}
-			</div>
-			<div>
+			<div className="flex flex-col gap-4">
+				{schema.map((field) => {
+					const {
+						type,
+						name,
+						error,
+						required,
+						placeholder,
+						pattern,
+						label,
+					} = field
+
+					return (
+						<div
+							key={`${formName}-${name}`}
+							className="flex flex-col gap-1"
+						>
+							<Field
+								register={register}
+								required={required}
+								name={name}
+								placeholder={placeholder}
+								type={type}
+								pattern={pattern}
+								label={label}
+								error={error}
+							/>
+							{Object.keys(errors).length > 0 &&
+								errors[name]?.type === 'required' && (
+									<ErrorMessage>
+										Este campo é obrigatório
+									</ErrorMessage>
+								)}
+						</div>
+					)
+				})}
 				<Button type="submit">Submit</Button>
 			</div>
 		</form>
 	)
 }
 
-export default Form
+export default GenericForm

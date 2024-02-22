@@ -22,8 +22,6 @@ const useAuth = (): UseAuthType => {
 				},
 			})
 
-			console.log(response)
-
 			if (response.status === 200) {
 				setError(null)
 				const { user, tokens } = response.data

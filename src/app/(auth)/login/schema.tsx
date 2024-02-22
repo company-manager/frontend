@@ -1,20 +1,22 @@
-import { SchemaFieldsType } from '@global-types/global.types'
+import { SchemaFieldsType, FieldEnum } from '@global-types/form/form.types'
 
 const schema: SchemaFieldsType[] = [
 	{
-		type: 'input',
+		type: FieldEnum.INPUT,
 		name: 'email',
-		placeholder: 'Email',
 		pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+		required: true,
+		label: 'Email',
 		error: {
 			invalid: 'Email is invalid',
 			required: 'Email is required',
 		},
 	},
 	{
-		type: 'input',
+		type: FieldEnum.INPUT,
 		name: 'password',
-		placeholder: 'Password',
+		required: true,
+		label: 'Password',
 		error: {
 			invalid: 'Password is invalid',
 			required: 'Password is required',

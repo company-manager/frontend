@@ -1,17 +1,8 @@
-import React, { useEffect } from 'react'
-import { Input } from '@ui/input'
-import { Label } from '@ui/label'
-import { Button } from '@ui/button'
-import { useForm, SubmitHandler } from 'react-hook-form'
-import useAuth from '@hooks/useAuth'
+import React from 'react'
 import Heading from '@components/shared/heading/Heading'
 import Text from '@components/shared/text/Text'
 import Form from '@components/shared/form/Form'
-
-type LoginDataType = {
-	email: string
-	password: string
-}
+import schema from './schema'
 
 const Login = () => {
 	return (
@@ -25,7 +16,7 @@ const Login = () => {
 					</Text>
 				</div>
 
-				<Form />
+				<Form formName="login-form" schema={schema} />
 			</div>
 		</div>
 	)
