@@ -19,7 +19,7 @@ const GenericForm = ({
 	onSubmit,
 	register,
 	errors,
-}: PropsType<T>) => {
+}: PropsType) => {
 	return (
 		<form onSubmit={onSubmit} className="w-full">
 			<div className="flex flex-col gap-4">
