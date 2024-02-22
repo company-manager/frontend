@@ -31,7 +31,7 @@ const GenericForm = ({ schema, formName }: PropsType) => {
 		await login({ email, password })
 	}
 
-	// console.log(errors)
+	console.log(errors)
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="w-full">
