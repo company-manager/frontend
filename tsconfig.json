@@ -22,7 +22,6 @@
 		"paths": {
 			"@*": ["src/*"],
 			"@global-types/*": ["src/types/*"],
-			"@components/*": ["src/components/*"],
 			"@ui/*": ["src/components/ui/*"]
 		},
 		"forceConsistentCasingInFileNames": true

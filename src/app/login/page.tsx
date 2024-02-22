@@ -1,28 +1,20 @@
 'use client'
-import React from 'react'
-import { Input } from '@components/ui/input'
-import { Label } from '@components/ui/label'
-import { Button } from '@components/ui/button'
+import React, { useEffect } from 'react'
+import { Input } from '@ui/input'
+import { Label } from '@ui/label'
+import { Button } from '@ui/button'
+import useLogin from '@hooks/useLogin'
 
 const Home = () => {
+	const { login, error } = useLogin()
+
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault()
 
-		const result = await fetch('http://localhost:3003/api/v1/auth/login', {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				user: {
-					email: 'nuno@email.com',
-					password: '12345',
-				},
-			}),
+		await login({
+			email: 'nuno@email.com',
+			password: '12345',
 		})
-			.then((data) => data.json())
-			.then((data) => console.log(data))
 	}
 
 	return (
@@ -33,10 +25,20 @@ const Home = () => {
 				<div>
 					<Label htmlFor="email">Email</Label>
 					<Input id="email" />
+					{error?.tip?.includes('Email') && (
+						<span className="text-xs text-red-400">
+							Email not valid
+						</span>
+					)}
 				</div>
 				<div className="mt-6">
 					<Label htmlFor="password">Password</Label>
 					<Input id="password" />
+					{error?.tip?.includes('Password') && (
+						<span className="text-xs text-red-400">
+							Password incorrect
+						</span>
+					)}
 				</div>
 				<div className="mt-6">
 					<Button type="submit">Submit</Button>
