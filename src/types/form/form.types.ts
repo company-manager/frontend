@@ -1,5 +1,3 @@
-import { WithKeyProps } from '@global-types/global.types'
-
 type SchemaFieldErrorType = {
 	invalid?: string
 	required?: string
