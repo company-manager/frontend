@@ -4,10 +4,9 @@ const schema: SchemaFieldsType[] = [
 	{
 		type: FieldEnum.INPUT,
 		inputType: 'text',
-		name: 'email',
-		pattern: new RegExp(/^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/).source,
+		name: 'firstName',
 		required: true,
-		label: 'Email',
+		label: 'First Name',
 		error: {
 			invalid: 'Este campo está inválido',
 			required: 'Este campo é obrigatório',
@@ -15,10 +14,10 @@ const schema: SchemaFieldsType[] = [
 	},
 	{
 		type: FieldEnum.INPUT,
-		inputType: 'password',
-		name: 'password',
+		inputType: 'text',
+		name: 'lastName',
 		required: true,
-		label: 'Password',
+		label: 'Last Name',
 		error: {
 			invalid: 'Este campo está inválido',
 			required: 'Este campo é obrigatório',

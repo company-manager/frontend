@@ -1,16 +1,17 @@
 import { useContext, useState } from 'react'
-import { AuthContext } from '@context/auth/AuthContext'
-import { UseAuthType } from './types'
-import useRedirect from './useRedirect'
-import { LoginDataType } from '@context/auth/types'
-import { axiosPrivate } from '@lib/axios'
 import { isAxiosError } from 'axios'
 import { ApiStatusResponse } from '@global-types/global.types'
+import { axiosPrivate } from '@lib/axios'
+import { AuthContext } from '@context/auth/AuthContext'
+import { LoginDataType } from '@context/auth/types'
+import { UseAuthType } from '@hooks/types'
+import useRedirect from '@hooks/useRedirect'
+import useNotifications, { NotificationType } from '@hooks/useNotifications'
 
 const useAuth = (): UseAuthType => {
 	const { isAuthenticated, accessToken, setAccessToken } =
 		useContext(AuthContext)
-	const [error, setError] = useState<ApiStatusResponse | null>(null)
+	const { setNotification } = useNotifications()
 	const { redirect } = useRedirect()
 
 	const login = async ({ email, password }: LoginDataType) => {
@@ -23,7 +24,7 @@ const useAuth = (): UseAuthType => {
 			})
 
 			if (response.status === 200) {
-				setError(null)
+				setNotification(null)
 				const { user, tokens } = response.data
 				const { accessToken } = tokens
 				const { id } = user
@@ -33,9 +34,17 @@ const useAuth = (): UseAuthType => {
 				setAccessToken(accessToken)
 				redirect('/dashboard')
 			}
-		} catch (e) {
-			if (isAxiosError(e)) {
-				setError(e?.response?.data)
+		} catch (error) {
+			if (isAxiosError(error)) {
+				const data = error?.response?.data
+				const notification: NotificationType = {
+					message: data?.tip,
+					type: 'error',
+				}
+
+				console.log('in', notification)
+
+				setNotification(notification)
 			}
 		}
 	}
@@ -50,7 +59,7 @@ const useAuth = (): UseAuthType => {
 		}
 	}
 
-	return { isAuthenticated, accessToken, login, logout, error }
+	return { isAuthenticated, accessToken, login, logout }
 }
 
 export default useAuth

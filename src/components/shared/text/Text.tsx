@@ -7,6 +7,7 @@ const textVariants = cva('leading-very-tight', {
 		variant: {
 			default: 'text-coral dark:text-white',
 			secondary: 'text-dark-grey dark:text-light-grey',
+			error: 'text-destructive',
 		},
 		size: {
 			xxs: 'text-xxs',

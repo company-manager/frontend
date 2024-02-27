@@ -4,7 +4,7 @@ import { Fira_Sans } from 'next/font/google'
 import '../styles/globals.scss'
 import { ChildrenType } from '@global-types/global.types'
 import AuthContextProvider from '@context/auth/AuthContext'
-import Link from 'next/link'
+import NotificationsProvider from '@context/notifications/NotificationsContext'
 
 const firaSans = Fira_Sans({
 	weight: ['400', '600'],
@@ -20,11 +20,13 @@ type PropsTypes = {
 export default function RootLayout({ children }: PropsTypes) {
 	return (
 		<AuthContextProvider>
-			<html lang="en">
-				<body className={firaSans.className}>
-					<main className="p-8">{children}</main>
-				</body>
-			</html>
+			<NotificationsProvider>
+				<html lang="en">
+					<body className={firaSans.className}>
+						<main className="p-8">{children}</main>
+					</body>
+				</html>
+			</NotificationsProvider>
 		</AuthContextProvider>
 	)
 }
