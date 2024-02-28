@@ -1,15 +1,17 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { isAxiosError } from 'axios'
 import { ApiStatusResponse } from '@global-types/global.types'
 import { axiosPrivate } from '@lib/axios'
 import { AuthContext } from '@context/auth/AuthContext'
 import { LoginDataType } from '@context/auth/types'
+import { NotificationType } from '@context/notifications/types'
 import { UseAuthType } from '@hooks/types'
 import useRedirect from '@hooks/useRedirect'
-import useNotifications, { NotificationType } from '@hooks/useNotifications'
+import useNotifications from '@hooks/useNotifications'
+import errors from '@utils/errors'
 
 const useAuth = (): UseAuthType => {
-	const { isAuthenticated, accessToken, setAccessToken } =
+	const { accessToken, setAccessToken, isAuthenticated, setIsAuthenticated } =
 		useContext(AuthContext)
 	const { setNotification } = useNotifications()
 	const { redirect } = useRedirect()
@@ -33,18 +35,32 @@ const useAuth = (): UseAuthType => {
 
 				setAccessToken(accessToken)
 				redirect('/dashboard')
+
+				return response.status
 			}
 		} catch (error) {
 			if (isAxiosError(error)) {
+				let message = ''
 				const data = error?.response?.data
+				const isPasswordIncorrect = data?.tip
+					.toLowerCase()
+					.includes('password is incorrect')
+				const isEmailIncorrect = data?.tip
+					.toLowerCase()
+					.includes('email not found')
+
+				if (isPasswordIncorrect)
+					message = errors.login.password.incorrect
+				if (isEmailIncorrect) message = errors.login.email.incorrect
+
 				const notification: NotificationType = {
-					message: data?.tip,
+					message: !!message ? message : errors.login.generic,
 					type: 'error',
 				}
 
-				console.log('in', notification)
-
 				setNotification(notification)
+
+				return error?.response?.data?.code
 			}
 		}
 	}
@@ -59,7 +75,14 @@ const useAuth = (): UseAuthType => {
 		}
 	}
 
-	return { isAuthenticated, accessToken, login, logout }
+	return {
+		isAuthenticated,
+		setIsAuthenticated,
+		accessToken,
+		login,
+		logout,
+		setAccessToken,
+	}
 }
 
 export default useAuth

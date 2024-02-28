@@ -1,13 +1,15 @@
+import { Dispatch, MutableRefObject, SetStateAction } from 'react'
+
+type AuthContextType = {
+	isAuthenticated: MutableRefObject<boolean>
+	accessToken: string | null
+	setAccessToken: Dispatch<SetStateAction<string | null>>
+	setIsAuthenticated: (status: boolean) => void
+}
+
 type LoginDataType = {
 	email: string
 	password: string
-}
-
-type AuthContextType = {
-	isAuthenticated: boolean
-	user: UserType | null
-	authenticate: (data: LoginDataType) => Promise<void>
-	refresh: any
 }
 
 type UserType = {

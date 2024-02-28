@@ -23,7 +23,7 @@ export default function RootLayout({ children }: PropsTypes) {
 			<NotificationsProvider>
 				<html lang="en">
 					<body className={firaSans.className}>
-						<main className="p-8">{children}</main>
+						<main className="p-4 414:p-8">{children}</main>
 					</body>
 				</html>
 			</NotificationsProvider>
