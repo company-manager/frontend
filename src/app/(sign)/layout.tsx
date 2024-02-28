@@ -1,6 +1,6 @@
 import React from 'react'
 import { ChildrenType } from '@global-types/global.types'
-import Footer from './(components)/Footer'
+import Footer from './(sign-in)/(components)/Footer'
 
 type PropsType = {
 	children: ChildrenType

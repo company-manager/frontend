@@ -12,35 +12,12 @@ type PropsTypes = {
 }
 
 const AuthContextProvider = ({ children }: PropsTypes) => {
-	const { redirect } = useRedirect()
 	const [accessToken, setAccessToken] = useState<string | null>(null)
 	const isAuthenticated = useRef<boolean>(false)
 
 	const setIsAuthenticated = (status: boolean) => {
 		isAuthenticated.current = status
 	}
-
-	useEffect(() => {
-		const refreshToken = async () => {
-			try {
-				const response = await axios.get(`auth/refresh`, {
-					withCredentials: true,
-				})
-
-				if (response.data) {
-					const { accessToken } = response.data.tokens
-					setAccessToken(accessToken)
-					setIsAuthenticated(true)
-
-					redirect('/dashboard')
-				}
-			} catch (error) {
-				redirect('/login')
-			}
-		}
-
-		refreshToken()
-	}, [])
 
 	return (
 		<AuthContext.Provider

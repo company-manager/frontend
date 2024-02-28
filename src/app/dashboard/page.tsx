@@ -1,5 +1,6 @@
 'use client'
 import { Button } from '@components/ui/button'
+import isAuth from '@hoc/isAuth'
 import useAuth from '@hooks/useAuth'
 
 const Dashboard = () => {
@@ -15,4 +16,4 @@ const Dashboard = () => {
 	)
 }
 
-export default Dashboard
+export default isAuth(Dashboard)
