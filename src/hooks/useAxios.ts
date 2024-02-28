@@ -5,7 +5,7 @@ import useAuth from '@hooks/useAuth'
 import useRedirect from '@hooks/useRedirect'
 
 const useAxios = () => {
-	const { accessToken } = useAuth()
+	const { accessToken, setIsAuthenticated } = useAuth()
 	const { refresh } = useRefreshToken()
 
 	useEffect(() => {
@@ -19,7 +19,9 @@ const useAxios = () => {
 
 				return config
 			},
-			(error) => Promise.reject(error)
+			(error) => {
+				Promise.reject(error)
+			}
 		)
 
 		const responseInterceptor = axiosPrivate.interceptors.response.use(
@@ -40,6 +42,7 @@ const useAxios = () => {
 					return Promise.resolve(newAccessToken)
 				}
 
+				setIsAuthenticated(false)
 				return Promise.reject(error)
 			}
 		)

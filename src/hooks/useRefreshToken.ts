@@ -1,10 +1,9 @@
-import { useContext } from 'react'
-import { AuthContext } from '@context/auth/AuthContext'
 import axios from '@lib/axios'
-import useRedirect from './useRedirect'
+import useRedirect from '@hooks/useRedirect'
+import useAuth from '@hooks/useAuth'
 
 const useRefreshToken = () => {
-	const { setAccessToken } = useContext(AuthContext)
+	const { setAccessToken, setIsAuthenticated } = useAuth()
 	const { redirect } = useRedirect()
 
 	const refresh = async () => {
@@ -14,12 +13,17 @@ const useRefreshToken = () => {
 			})
 
 			if (response.data) {
+				const { user } = response.data
 				const { accessToken } = response.data.tokens
+
+				// TODO: share user data (user context?)
 				setAccessToken(accessToken)
+				setIsAuthenticated(true)
 
 				return accessToken
 			}
 		} catch (error) {
+			setIsAuthenticated(false)
 			redirect('/login')
 		}
 	}

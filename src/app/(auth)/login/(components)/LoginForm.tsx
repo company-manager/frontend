@@ -1,14 +1,17 @@
 'use client'
-import React from 'react'
-import useAuth from '@hooks/useAuth'
-import { LoginDataType } from '@context/auth/types'
+import React, { useState } from 'react'
+import { Loader2Icon } from 'lucide-react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Button } from '@ui/button'
+import { LoginDataType } from '@context/auth/types'
 import ErrorMessage from '@components/shared/form/ErrorMessage'
-import { Input } from '@components/ui/input'
-import { Label } from '@components/ui/label'
+import { Input } from '@ui/input'
+import { Label } from '@ui/label'
+import { Button } from '@ui/button'
+import useAuth from '@hooks/useAuth'
+import errorMessages from '@utils/errors'
 
 const LoginForm = () => {
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const { login } = useAuth()
 	const {
 		handleSubmit,
@@ -18,9 +21,16 @@ const LoginForm = () => {
 
 	const onSubmit: SubmitHandler<LoginDataType> = async (data) => {
 		try {
+			setIsLoading(true)
 			const { email, password } = data
-			await login({ email, password })
-		} catch (e) {
+			const response = await login({ email, password })
+
+			console.log(response)
+
+			if (response !== 200) setIsLoading(false)
+		} catch (error) {
+			setIsLoading(false)
+			console.log(error)
 			console.error('SERVER ERROR')
 		}
 	}
@@ -43,11 +53,15 @@ const LoginForm = () => {
 					/>
 					{Object.keys(errors).length > 0 &&
 						errors['email']?.type === 'required' && (
-							<ErrorMessage>Email obrigatório</ErrorMessage>
+							<ErrorMessage>
+								{errorMessages.login.email.required}
+							</ErrorMessage>
 						)}
 					{Object.keys(errors).length > 0 &&
 						errors['email']?.type === 'pattern' && (
-							<ErrorMessage>Email inválido</ErrorMessage>
+							<ErrorMessage>
+								{errorMessages.login.email.invalid}
+							</ErrorMessage>
 						)}
 				</div>
 				<div className="flex flex-col gap-1">
@@ -61,11 +75,20 @@ const LoginForm = () => {
 					/>
 					{errors['password']?.type === 'required' &&
 						Object.keys(errors).length > 0 && (
-							<ErrorMessage>Password obrigatória</ErrorMessage>
+							<ErrorMessage>
+								{errorMessages.login.password.required}
+							</ErrorMessage>
 						)}
 				</div>
 
-				<Button type="submit">Entrar</Button>
+				<Button disabled={isLoading} type="submit">
+					Entrar{' '}
+					{isLoading && (
+						<div className="ml-2 animate-spin">
+							<Loader2Icon size={16} />
+						</div>
+					)}
+				</Button>
 			</div>
 		</form>
 	)

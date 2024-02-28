@@ -1,12 +1,17 @@
 'use client'
-import { createContext, useState, SetStateAction, Dispatch } from 'react'
+import {
+	SetStateAction,
+	Dispatch,
+	MutableRefObject,
+	createContext,
+	useState,
+	useEffect,
+	useRef,
+} from 'react'
+import { AuthContextType } from './types'
 import { ChildrenType } from '@global-types/global.types'
-
-type AuthContextType = {
-	isAuthenticated: boolean
-	accessToken: string | null
-	setAccessToken: Dispatch<SetStateAction<string | null>>
-}
+import axios from '@lib/axios'
+import useRedirect from '@hooks/useRedirect'
 
 export const AuthContext = createContext<AuthContextType>({} as AuthContextType)
 
@@ -15,12 +20,44 @@ type PropsTypes = {
 }
 
 const AuthContextProvider = ({ children }: PropsTypes) => {
+	const { redirect } = useRedirect()
 	const [accessToken, setAccessToken] = useState<string | null>(null)
-	const isAuthenticated = !!accessToken
+	const isAuthenticated = useRef<boolean>(false)
+
+	const setIsAuthenticated = (status: boolean) => {
+		isAuthenticated.current = status
+	}
+
+	useEffect(() => {
+		const refreshToken = async () => {
+			try {
+				const response = await axios.get(`auth/refresh`, {
+					withCredentials: true,
+				})
+
+				if (response.data) {
+					const { accessToken } = response.data.tokens
+					setAccessToken(accessToken)
+					setIsAuthenticated(true)
+
+					redirect('/dashboard')
+				}
+			} catch (error) {
+				redirect('/login')
+			}
+		}
+
+		refreshToken()
+	}, [])
 
 	return (
 		<AuthContext.Provider
-			value={{ isAuthenticated, accessToken, setAccessToken }}
+			value={{
+				isAuthenticated,
+				setIsAuthenticated,
+				accessToken,
+				setAccessToken,
+			}}
 		>
 			{children}
 		</AuthContext.Provider>
