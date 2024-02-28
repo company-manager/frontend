@@ -1,13 +1,5 @@
 'use client'
-import {
-	SetStateAction,
-	Dispatch,
-	MutableRefObject,
-	createContext,
-	useState,
-	useEffect,
-	useRef,
-} from 'react'
+import { createContext, useState, useEffect, useRef } from 'react'
 import { AuthContextType } from './types'
 import { ChildrenType } from '@global-types/global.types'
 import axios from '@lib/axios'
